@@ -16,8 +16,10 @@ jobs:
     steps:
     - name: Check if "Anaconda.org" checkbox is checked
       id: filter
+      env:
+        ISSUE_BODY: ${{ github.event.issue.body }}
       run: |
-        body="${{ github.event.issue.body }}"
+        body="$ISSUE_BODY"
         search_term="- [x] Anaconda.org"
 
         if printf '%s\n' "$body" | grep -Fxq -- "$search_term"; then
